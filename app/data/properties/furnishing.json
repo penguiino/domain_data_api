@@ -1,0 +1,5 @@
+[
+  { "id": "unfurnished", "label": "Unfurnished" },
+  { "id": "semi", "label": "Semi-Furnished" },
+  { "id": "full", "label": "Fully Furnished" }
+]

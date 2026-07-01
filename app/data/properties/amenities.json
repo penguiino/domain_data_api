@@ -1,0 +1,8 @@
+[
+  { "id": "elevator", "label": "Elevator" },
+  { "id": "parking", "label": "Parking" },
+  { "id": "ac", "label": "Air Conditioning" },
+  { "id": "pool", "label": "Swimming Pool" },
+  { "id": "wifi", "label": "Wi-Fi" },
+  { "id": "furnished", "label": "Furnished" }
+]

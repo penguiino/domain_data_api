@@ -1,0 +1,233 @@
+🧠 Core idea
+
+A delayed-feedback forecasting app.
+Users make probabilistic predictions about real-world prompts, then receive feedback weeks or months later when outcomes resolve. The design emphasizes commitment, reflection, and calibration, not speed or feeds.
+
+🧱 Tech stack
+
+Flutter (Android-first)
+
+Riverpod 2.x for state management
+
+GoRouter for navigation + auth gating
+
+Firebase
+
+Authentication (email/password)
+
+Firestore (users, prompts, forecasts)
+
+MVVM architecture
+
+📁 Architecture overview
+lib/
+├── core/
+│   └── router/          # GoRouter + auth-aware redirects
+├── features/
+│   ├── auth/            # Login / Signup
+│   ├── feed/            # Prompt feed
+│   ├── forecast/        # Submit + view forecasts
+│   ├── profile/         # User stats + history
+│   └── comments/        # Discussion on resolved prompts
+├── models/              # UserProfile, UserForecast, Prompt
+├── services/            # Firestore + auth repositories
+├── viewmodels/          # Riverpod StateNotifiers
+└── main.dart
+
+👤 User flows
+1️⃣ Authentication
+
+Email/password signup
+
+Username uniqueness enforced
+
+Login / logout
+
+Auth state synced to router
+
+Automatic redirect:
+
+Logged out → /login
+
+Logged in → /feed
+
+2️⃣ Feed (Prompt discovery)
+
+Streamed from Firestore (prompts collection)
+
+Sorted by createdAt
+
+Each prompt has:
+
+text
+
+status: open or resolved
+
+outcome (if resolved)
+
+Tap behavior:
+
+Open + no forecast → Forecast submission
+
+Open + already forecasted → Forecast detail
+
+Resolved → Forecast detail (with or without user forecast)
+
+3️⃣ Forecast submission
+
+Probability slider (0–100%)
+
+Rationale text input
+
+Immutable after submission
+
+Forecast stored in forecasts collection:
+
+userId
+
+promptId
+
+probability
+
+rationale
+
+timestamp
+
+4️⃣ Forecast detail
+
+Handles multiple cases:
+
+User has forecast
+
+User didn’t forecast
+
+Prompt resolved or unresolved
+
+Displays:
+
+Prompt text
+
+Forecast card (if exists)
+
+Live status (open / resolved)
+
+Outcome (when resolved)
+
+Score + XP (when resolved & predicted)
+
+Comments section
+
+5️⃣ Profile
+
+User information
+
+Forecast history
+
+XP
+
+Count of forecasts made
+
+Tap any forecast → Forecast detail page
+
+6️⃣ Resolution & scoring (admin / future logic)
+
+Admin can resolve prompts (true / false)
+
+Resolution triggers:
+
+Score calculation
+
+XP assignment
+
+Designed to be extended later (AI or API-based resolution)
+
+🔐 Firestore model (high level)
+users/{uid}
+{
+  "email": "...",
+  "username": "...",
+  "createdAt": "...",
+  "forecastsMade": 12,
+  "xp": 340
+}
+
+prompts/{promptId}
+{
+  "text": "...",
+  "status": "open | resolved",
+  "outcome": true | false,
+  "createdAt": "..."
+}
+
+forecasts/{forecastId}
+{
+  "userId": "...",
+  "promptId": "...",
+  "probability": 0.65,
+  "rationale": "...",
+  "createdAt": "...",
+  "score": 0.21,
+  "xpAwarded": 15
+}
+
+🧭 Navigation rules (important)
+
+Router listens to Firebase auth stream
+
+Auth-aware redirects prevent invalid states
+
+/forecast_detail is data-driven, not path-driven:
+
+Uses state.extra (UserForecast or prompt map)
+
+Prevents:
+
+Editing forecasts
+
+Accessing protected pages while logged out
+
+🧩 Known constraints (intentional)
+
+No editing forecasts after submission
+
+No “instant feedback”
+
+No infinite scrolling or engagement loops
+
+Minimal UI, dark theme
+
+Android-only for now
+
+🛠️ Current status
+
+✅ Auth flow stable
+
+✅ Router + redirects stable
+
+✅ Feed / forecast / profile working
+
+✅ Permission issues resolved
+
+🟡 Scoring logic basic (extensible)
+
+🟡 Admin resolution manual
+
+🔜 AI-assisted resolution + analysis (future)
+
+🧠 What makes this project special
+
+Designed around epistemic discipline, not dopamine
+
+Forces users to commit beliefs under uncertainty
+
+Feedback delayed → encourages calibration, not reaction
+
+Clean architecture, easy to extend into:
+
+leagues
+
+calibration charts
+
+long-term accuracy tracking
+
+AI explanations of why predictions failed/succeeded

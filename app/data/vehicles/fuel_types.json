@@ -1,0 +1,6 @@
+[
+  { "id": "gasoline", "label": "Gasoline" },
+  { "id": "diesel", "label": "Diesel" },
+  { "id": "electric", "label": "Electric" },
+  { "id": "hybrid", "label": "Hybrid" }
+]

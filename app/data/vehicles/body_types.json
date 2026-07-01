@@ -1,0 +1,8 @@
+[
+  { "id": "sedan", "label": "Sedan" },
+  { "id": "suv", "label": "SUV" },
+  { "id": "hatchback", "label": "Hatchback" },
+  { "id": "truck", "label": "Truck" },
+  { "id": "van", "label": "Van" },
+  { "id": "motorcycle", "label": "Motorcycle" }
+]

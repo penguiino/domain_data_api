@@ -1,0 +1,5 @@
+[
+  { "id": "auto", "label": "Automatic" },
+  { "id": "manual", "label": "Manual" },
+  { "id": "cvt", "label": "CVT" }
+]

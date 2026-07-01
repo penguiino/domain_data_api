@@ -1,0 +1,6 @@
+[
+  { "country": "United States", "languages": ["English"] },
+  { "country": "Canada", "languages": ["English", "French"] },
+  { "country": "Germany", "languages": ["German"] },
+  { "country": "Tunisia", "languages": ["Arabic", "French"] }
+]

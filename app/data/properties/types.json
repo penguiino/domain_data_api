@@ -1,0 +1,8 @@
+[
+  { "id": "apt", "label": "Apartment" },
+  { "id": "house", "label": "House" },
+  { "id": "studio", "label": "Studio" },
+  { "id": "duplex", "label": "Duplex" },
+  { "id": "villa", "label": "Villa" },
+  { "id": "loft", "label": "Loft" }
+]
